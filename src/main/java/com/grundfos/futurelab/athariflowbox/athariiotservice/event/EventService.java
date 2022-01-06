@@ -16,7 +16,7 @@ public class EventService {
         Event event = Event.builder()
                 .id(UUID.randomUUID().toString())
                 .serialNumber(dto.getSerialNumber())
-                .type(dto.getType())
+                .type(dto.getType().getEvent())
                 .data(data)
                 .build();
 

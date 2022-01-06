@@ -12,8 +12,6 @@ public class EventDomain<T> {
     private String type;
     private String serialNumber;
     private T data;
-    private String sessionType;
-    private double amountFetched;
     private LocalDateTime createdAt;
 
 }

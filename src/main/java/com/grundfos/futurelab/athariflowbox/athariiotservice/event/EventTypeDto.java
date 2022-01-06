@@ -8,7 +8,7 @@ import java.util.Map;
 @Data
 public class EventTypeDto {
     @NotNull
-    private String type;
+    private DeviceEvent type;
     @NotNull
     private String serialNumber;
     @NotNull
