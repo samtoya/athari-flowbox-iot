@@ -1,4 +1,4 @@
-package com.grundfos.futurelab.athariflowbox.athariiotservice.dtos;
+package com.grundfos.futurelab.athariflowbox.athariiotservice.event;
 
 import lombok.Data;
 
@@ -12,5 +12,5 @@ public class EventTypeDto {
     @NotNull
     private String serialNumber;
     @NotNull
-    private Map<String, Object> data;
+    private Map<String, String> data;
 }

@@ -5,7 +5,6 @@ import com.grundfos.futurelab.athariflowbox.athariiotservice.domain.CardScannedE
 import com.grundfos.futurelab.athariflowbox.athariiotservice.domain.DeviceInitializationEventDomain;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.domain.PowerEventDomain;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.domain.TimeStampEventDomain;
-import com.grundfos.futurelab.athariflowbox.athariiotservice.dtos.EventTypeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

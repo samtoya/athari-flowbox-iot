@@ -1,7 +1,6 @@
 package com.grundfos.futurelab.athariflowbox.athariiotservice.event;
 
 import com.google.gson.Gson;
-import com.grundfos.futurelab.athariflowbox.athariiotservice.dtos.EventTypeDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
