@@ -17,8 +17,8 @@ spring:
     hibernate:
       ddl-auto: create-drop
     show-sql: false
-server:
-  port: 0
+#server:
+#  port: 0
 eureka:
   instance:
     instance-id: ${spring.application.name}:${random.uuid}
