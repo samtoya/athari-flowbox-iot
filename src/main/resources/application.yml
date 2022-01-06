@@ -1,0 +1,24 @@
+spring:
+  cloud:
+    config:
+      enabled: false
+  application:
+    name: iot-service
+  datasource:
+    username: samtoya
+    password: password
+    driver-class-name: org.h2.Driver
+    generate-unique-name: false
+    url: jdbc:h2:mem:athari_flowbox_iot
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+server:
+  port: 0
+eureka:
+  instance:
+    instance-id: ${spring.application.name}:${random.uuid}
