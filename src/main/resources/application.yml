@@ -6,11 +6,14 @@ spring:
   application:
     name: iot-service
   datasource:
-    driver-class-name: org.h2.Driver
+    driver-class-name: org.postgresql.Driver
     generate-unique-name: false
-    name: iot-service
-    username: sa
-    password:
-    url: jdbc:h2:mem:iot
+    name: athari_flowbox_iot
+    username: flowbox@athari-flowbox-postgres
+    password: kya3yqv*yqw*ENP*crg
+    url: jdbc:postgresql://athari-flowbox-postgres.postgres.database.azure.com:5432/athari_flowbox_iot
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
 server:
   port: 3456

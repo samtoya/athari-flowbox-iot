@@ -1,14 +1,11 @@
 package com.grundfos.futurelab.athariflowbox.athariiotservice.device;
 
 import com.grundfos.futurelab.athariflowbox.athariiotservice.common.ApiResponse;
-import io.swagger.annotations.Api;
-import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBuilder;
 
-import javax.ws.rs.Consumes;
 import java.net.URI;
 import java.util.Collection;
 import java.util.List;
