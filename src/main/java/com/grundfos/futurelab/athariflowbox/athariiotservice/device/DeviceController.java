@@ -16,13 +16,12 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(path = "/api/devices", produces = "application/json", consumes = "application/json")
+@RequestMapping(path = "/api/devices")
 @RequiredArgsConstructor
 public class DeviceController {
     private final DeviceService deviceService;
 
     @GetMapping
-    @Consumes(value = "applicatiom/json")
     public ResponseEntity<ApiResponse<Collection<DeviceDomain>>> getAllDevices() {
         ApiResponse<Collection<DeviceDomain>> apiResponse = new ApiResponse<>();
         List<DeviceDomain> domains = deviceService.fetchAll().stream().map(DeviceDomain::mapEntityToDomain)

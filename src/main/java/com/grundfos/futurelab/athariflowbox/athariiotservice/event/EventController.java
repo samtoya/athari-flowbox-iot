@@ -20,7 +20,7 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api/events", produces = "application/json", consumes = "application/json")
+@RequestMapping(path = "/api/events")
 public class EventController {
     private final EventService eventService;
     private final DeviceSessionService deviceSessionService;

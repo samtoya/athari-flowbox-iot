@@ -5,5 +5,12 @@ spring:
       uri: http://localhost:11144
   application:
     name: iot-service
+  datasource:
+    driver-class-name: org.h2.Driver
+    generate-unique-name: false
+    name: iot-service
+    username: sa
+    password:
+    url: jdbc:h2:mem:iot
 server:
   port: 3456

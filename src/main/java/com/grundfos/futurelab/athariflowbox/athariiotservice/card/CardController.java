@@ -18,7 +18,7 @@ import java.util.stream.Collectors;
 @Api(tags = {"cards"})
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api/cards", produces = "application/json", consumes = "application/json")
+@RequestMapping(path = "/api/cards")
 public class CardController {
 
     private final CardService cardService;

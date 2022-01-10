@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping(path = "/api/sessions/", produces = "application/json", consumes = "application/json")
+@RequestMapping(path = "/api/sessions/")
 public class DeviceSessionController {
     private final DeviceService deviceService;
     private final DeviceSessionService deviceSessionService;
