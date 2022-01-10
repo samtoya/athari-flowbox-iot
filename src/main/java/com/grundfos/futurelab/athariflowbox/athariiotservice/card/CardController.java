@@ -1,6 +1,7 @@
 package com.grundfos.futurelab.athariflowbox.athariiotservice.card;
 
 import com.grundfos.futurelab.athariflowbox.athariiotservice.common.ApiResponse;
+import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,14 +9,16 @@ import org.springframework.web.servlet.mvc.method.annotation.MvcUriComponentsBui
 
 import java.net.URI;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+@Api(tags = {"cards"})
 @RestController
-@RequestMapping("/api/cards")
 @RequiredArgsConstructor
+@RequestMapping(path = "/api/cards", produces = "application/json", consumes = "application/json")
 public class CardController {
 
     private final CardService cardService;
@@ -39,7 +42,7 @@ public class CardController {
         return ResponseEntity.created(uri).body(apiResponse);
     }
 
-    @GetMapping("/cardId")
+    @GetMapping("/{cardId}")
     public ResponseEntity<ApiResponse<CardDomain>> getCard(@PathVariable("cardId") String cardId) {
         ApiResponse<CardDomain> apiResponse = new ApiResponse<>();
         Optional<Card> optionalCard = cardService.findCardById(cardId);
@@ -78,8 +81,8 @@ public class CardController {
 
     @PutMapping("/{cardId}")
     public ResponseEntity<ApiResponse<CardDomain>> updateCard(@PathVariable("cardId") String cardId, @RequestBody CardDto dto) {
-        ApiResponse<CardDomain> apiResponse = new ApiResponse<>();
         Optional<Card> optionalCard = cardService.findCardById(cardId);
+        ApiResponse<CardDomain> apiResponse = new ApiResponse<>();
         if (!optionalCard.isPresent()) {
             apiResponse.setData(null);
             apiResponse.setMessage("Card not found with ID: " + cardId);
