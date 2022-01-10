@@ -32,25 +32,16 @@ public class DeviceController {
     @PostMapping
     public ResponseEntity<ApiResponse<DeviceDomain>> createDevice(@RequestBody DeviceDto dto) {
         ApiResponse<DeviceDomain> apiResponse = new ApiResponse<>();
-        try {
-            Device device = deviceService.createDeviceFromDto(dto);
-            DeviceDomain domain = DeviceDomain.mapEntityToDomain(device);
-            apiResponse.setSuccess(Boolean.TRUE);
-            apiResponse.setData(domain);
-            URI uri = MvcUriComponentsBuilder.fromController(getClass())
-                    .path("/{deviceId}")
-                    .buildAndExpand(device.getId())
-                    .toUri();
+        Device device = deviceService.createDeviceFromDto(dto);
+        DeviceDomain domain = DeviceDomain.mapEntityToDomain(device);
+        apiResponse.setSuccess(Boolean.TRUE);
+        apiResponse.setData(domain);
+        URI uri = MvcUriComponentsBuilder.fromController(getClass())
+                .path("/{deviceId}")
+                .buildAndExpand(device.getId())
+                .toUri();
 
-            return ResponseEntity.created(uri).body(apiResponse);
-        } catch (Exception e) {
-            apiResponse.setSuccess(Boolean.FALSE);
-            apiResponse.setMessage(e.getMessage());
-            apiResponse.setData(null);
-
-            return ResponseEntity.internalServerError()
-                    .body(apiResponse);
-        }
+        return ResponseEntity.created(uri).body(apiResponse);
     }
 
     @GetMapping("/{deviceId}")

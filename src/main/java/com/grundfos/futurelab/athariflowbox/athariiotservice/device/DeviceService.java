@@ -18,10 +18,8 @@ public class DeviceService {
     }
 
     public Device createDeviceFromDto(DeviceDto dto) {
-        Device device = new Device();
-        BeanUtils.copyProperties(dto, device);
-        device.setId(UUID.randomUUID().toString());
-        return device;
+        Device device = Device.fromDto(dto);
+        return deviceRepository.save(device);
     }
 
     public void deleteDeviceById(String deviceId) {

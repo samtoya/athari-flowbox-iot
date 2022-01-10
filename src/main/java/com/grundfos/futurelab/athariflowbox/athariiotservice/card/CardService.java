@@ -18,10 +18,8 @@ public class CardService {
     }
 
     public Card createFromDto(CardDto dto) {
-        Card card = new Card();
-        BeanUtils.copyProperties(dto, card);
-        card.setId(UUID.randomUUID().toString());
-        return card;
+        Card card = Card.fromDto(dto);
+        return cardRepository.saveAndFlush(card);
     }
 
     public Optional<Card> findCardById(String cardId) {

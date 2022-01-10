@@ -15,5 +15,10 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create-drop
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+  sql:
+    init:
+      mode: always
 server:
   port: 3456
