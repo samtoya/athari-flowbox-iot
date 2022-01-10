@@ -18,12 +18,10 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(path = "/api/devices", produces = "application/json", consumes = "application/json")
 @RequiredArgsConstructor
-@Api(tags = {"devices"})
 public class DeviceController {
     private final DeviceService deviceService;
 
     @GetMapping
-    @ApiOperation(value = "", tags = {"events"}, consumes = "application/json")
     @Consumes(value = "applicatiom/json")
     public ResponseEntity<ApiResponse<Collection<DeviceDomain>>> getAllDevices() {
         ApiResponse<Collection<DeviceDomain>> apiResponse = new ApiResponse<>();

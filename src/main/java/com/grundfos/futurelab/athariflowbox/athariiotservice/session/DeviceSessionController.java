@@ -3,7 +3,6 @@ package com.grundfos.futurelab.athariflowbox.athariiotservice.session;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.common.ApiResponse;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.device.Device;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.device.DeviceService;
-import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +14,6 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
-@Api(tags = {"devices"})
 @RequestMapping(path = "/api/sessions/", produces = "application/json", consumes = "application/json")
 public class DeviceSessionController {
     private final DeviceService deviceService;

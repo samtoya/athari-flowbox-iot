@@ -8,7 +8,6 @@ import com.grundfos.futurelab.athariflowbox.athariiotservice.domain.TimeStampEve
 import com.grundfos.futurelab.athariflowbox.athariiotservice.session.DeviceSession;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.session.DeviceSessionService;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.session.SessionStatus;
-import io.swagger.annotations.Api;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,7 +20,6 @@ import java.util.Optional;
 
 @RestController
 @RequiredArgsConstructor
-@Api(tags = {"events"})
 @RequestMapping(path = "/api/events", produces = "application/json", consumes = "application/json")
 public class EventController {
     private final EventService eventService;
