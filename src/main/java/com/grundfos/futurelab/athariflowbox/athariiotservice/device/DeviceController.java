@@ -30,7 +30,7 @@ public class DeviceController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<DeviceDomain>> createDevice(@RequestBody DeviceDto dto) {
+    public ResponseEntity<ApiResponse<DeviceDomain>> createDevice(@RequestBody  DeviceDto dto) {
         ApiResponse<DeviceDomain> apiResponse = new ApiResponse<>();
         Device device = deviceService.createDeviceFromDto(dto);
         DeviceDomain domain = DeviceDomain.mapEntityToDomain(device);
