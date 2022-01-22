@@ -8,6 +8,8 @@ import com.grundfos.futurelab.athariflowbox.athariiotservice.domain.TimeStampEve
 import com.grundfos.futurelab.athariflowbox.athariiotservice.session.DeviceSession;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.session.DeviceSessionService;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.session.SessionStatus;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -21,11 +23,13 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/events")
+@Tag(name = "Events", description = "Device Event Management")
 public class EventController {
     private final EventService eventService;
     private final DeviceSessionService deviceSessionService;
 
     @PostMapping("/power")
+    @Operation(summary = "Power Event", description = "Power Event")
     public ResponseEntity<ApiResponse<PowerEventDomain>> saveEvent(@RequestBody EventTypeDto dto) {
         ApiResponse<PowerEventDomain> apiResponse = new ApiResponse<>();
         Event event = eventService.createFromEventDto(dto);
@@ -37,6 +41,7 @@ public class EventController {
     }
 
     @PostMapping("/initialization")
+    @Operation(summary = "Device Initialization Event", description = "Device Initialization Event")
     public ResponseEntity<ApiResponse<DeviceInitializationEventDomain>> handleDeviceInitialization(@RequestBody EventTypeDto dto) {
         ApiResponse<DeviceInitializationEventDomain> apiResponse = new ApiResponse<>();
         Event event = eventService.createFromEventDto(dto);
@@ -48,6 +53,7 @@ public class EventController {
     }
 
     @PostMapping("/card/scanned")
+    @Operation(summary = "Card Scanned Event", description = "Card Scanned Event")
     public ResponseEntity<ApiResponse<CardScannedEventDomain>> handleCardScanned(@RequestBody EventTypeDto dto) {
         ApiResponse<CardScannedEventDomain> apiResponse = new ApiResponse<>();
         Event event = eventService.createFromEventDto(dto);
@@ -59,6 +65,7 @@ public class EventController {
     }
 
     @PostMapping("/start_fetch")
+    @Operation(summary = "Start Fetch Event", description = "Start Fetch Event")
     public ResponseEntity<ApiResponse<TimeStampEventDomain>> handleStartFetch(@RequestBody EventTypeDto dto) {
         ApiResponse<TimeStampEventDomain> apiResponse = new ApiResponse<>();
         Event event = eventService.createFromEventDto(dto);
@@ -70,6 +77,7 @@ public class EventController {
     }
 
     @PostMapping("/stop_fetch")
+    @Operation(summary = "Stop Fetch Event", description = "Stop Fetch Event")
     public ResponseEntity<ApiResponse<TimeStampEventDomain>> handleStopFetch(@RequestBody EventTypeDto dto) {
         Event event = eventService.createFromEventDto(dto);
         ApiResponse<TimeStampEventDomain> apiResponse = new ApiResponse<>();
@@ -82,6 +90,7 @@ public class EventController {
     }
 
     @PostMapping("/fetch/timeout")
+    @Operation(summary = "Fetch Timeout Event", description = "Fetch Timeout Event")
     public ResponseEntity<ApiResponse<TimeStampEventDomain>> handleFetchTimeout(@RequestBody TimeoutEventTypeDto dto) {
         ApiResponse<TimeStampEventDomain> apiResponse = new ApiResponse<>();
         // Device sends its serialNumber,
@@ -111,6 +120,7 @@ public class EventController {
     }
 
     @PostMapping("/tamper")
+    @Operation(summary = "Tamper Event", description = "Tamper Event")
     public ResponseEntity<ApiResponse<TimeStampEventDomain>> handleTamper(@RequestBody EventTypeDto dto) {
         Event event = eventService.createFromEventDto(dto);
         ApiResponse<TimeStampEventDomain> apiResponse = new ApiResponse<>();
@@ -122,6 +132,7 @@ public class EventController {
     }
 
     @PostMapping("/leakage")
+    @Operation(summary = "Leakage Event", description = "Leakage Event")
     public ResponseEntity<ApiResponse<TimeStampEventDomain>> handleLeakage(@RequestBody EventTypeDto dto) {
         ApiResponse<TimeStampEventDomain> apiResponse = new ApiResponse<>();
         Event event = eventService.createFromEventDto(dto);
@@ -133,6 +144,7 @@ public class EventController {
     }
 
     @PostMapping("/battery_low")
+    @Operation(summary = "Battery Low Event", description = "Battery Low Event")
     public ResponseEntity<ApiResponse<TimeStampEventDomain>> handleBatteryLow(@RequestBody EventTypeDto dto) {
         Event event = eventService.createFromEventDto(dto);
         ApiResponse<TimeStampEventDomain> apiResponse = new ApiResponse<>();

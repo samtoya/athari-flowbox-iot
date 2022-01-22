@@ -3,6 +3,8 @@ package com.grundfos.futurelab.athariflowbox.athariiotservice.session;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.common.ApiResponse;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.device.Device;
 import com.grundfos.futurelab.athariflowbox.athariiotservice.device.DeviceService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,12 +16,14 @@ import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Device Session", description = "Device Session Controller")
 @RequestMapping(path = "/api/sessions/")
 public class DeviceSessionController {
     private final DeviceService deviceService;
     private final DeviceSessionService deviceSessionService;
 
     @GetMapping("/{serialNumber}")
+    @Operation(summary = "Get all sessions for a device", description = "Get all sessions for a device")
     public ResponseEntity<ApiResponse<Collection<DeviceSessionDomain>>> getAllSessionsForDevice(@PathVariable("serialNumber") String serialNumber) {
         Collection<DeviceSessionDomain> domains = deviceSessionService.getAllBySerialNumber(serialNumber).stream().map(DeviceSessionDomain::mapEntityToDomain).collect(Collectors.toList());
         ApiResponse<Collection<DeviceSessionDomain>> apiResponse = new ApiResponse<>();
@@ -30,6 +34,7 @@ public class DeviceSessionController {
     }
 
     @GetMapping("/{serialNumber}/active")
+    @Operation(summary = "Get active session for a device", description = "Get active session for a device")
     public ResponseEntity<ApiResponse<DeviceSessionDomain>> getActiveSessionBySerialNumber(@PathVariable("serialNumber") String serialNumber) {
         ApiResponse<DeviceSessionDomain> apiResponse = new ApiResponse<>();
         Optional<DeviceSession> optionalDeviceSession = deviceSessionService.findDeviceWithActiveSession(serialNumber);
@@ -49,6 +54,7 @@ public class DeviceSessionController {
     }
 
     @PostMapping
+    @Operation(summary = "Create a new session for a device", description = "Create a new session for a device")
     public ResponseEntity<ApiResponse<SessionRegisteredDomain>> createNewSession(@RequestBody @Valid DeviceSessionDto dto) {
         ApiResponse<SessionRegisteredDomain> apiResponse = new ApiResponse<>();
         // Check if a device with that serialNumber exists

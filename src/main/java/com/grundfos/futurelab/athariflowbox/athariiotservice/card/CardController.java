@@ -1,7 +1,8 @@
 package com.grundfos.futurelab.athariflowbox.athariiotservice.card;
 
 import com.grundfos.futurelab.athariflowbox.athariiotservice.common.ApiResponse;
-import io.swagger.annotations.Api;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,7 +16,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@Api(tags = {"cards"})
+@Tag(name = "Cards", description = "Card Management")
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(path = "/api/cards")
@@ -24,25 +25,29 @@ public class CardController {
     private final CardService cardService;
 
     @GetMapping
+    @Operation(summary = "Get all cards")
     public ResponseEntity<ApiResponse<Collection<CardDomain>>> getAll() {
-        List<CardDomain> domains = cardService.getAllCards().stream().map(CardDomain::mapEntityToDomain).collect(Collectors.toList());
+        List<CardDomain> domains = cardService.getAllCards()
+                .stream().map(CardDomain::mapEntityToDomain)
+                .collect(Collectors.toList());
         ApiResponse<Collection<CardDomain>> apiResponse = new ApiResponse<>(Boolean.TRUE, null, domains);
 
         return ResponseEntity.ok(apiResponse);
     }
 
     @PostMapping
+    @Operation(summary = "Create a new card")
     public ResponseEntity<ApiResponse<CardDomain>> create(@RequestBody CardDto dto) {
         Card card = cardService.createFromDto(dto);
         CardDomain domain = CardDomain.mapEntityToDomain(card);
         ApiResponse<CardDomain> apiResponse = new ApiResponse<>(Boolean.TRUE, null, domain);
-        URI uri = MvcUriComponentsBuilder.
-                fromController(getClass()).path("/{cardId}").buildAndExpand(card.getId()).toUri();
+        URI uri = MvcUriComponentsBuilder.fromController(getClass()).path("/{cardId}").buildAndExpand(card.getId()).toUri();
 
         return ResponseEntity.created(uri).body(apiResponse);
     }
 
     @GetMapping("/{cardId}")
+    @Operation(summary = "Get a card by ID")
     public ResponseEntity<ApiResponse<CardDomain>> getCard(@PathVariable("cardId") String cardId) {
         ApiResponse<CardDomain> apiResponse = new ApiResponse<>();
         Optional<Card> optionalCard = cardService.findCardById(cardId);
@@ -63,6 +68,7 @@ public class CardController {
     }
 
     @DeleteMapping("/{cardId}")
+    @Operation(summary = "Delete a card by ID")
     public ResponseEntity<ApiResponse<Void>> deleteCard(@PathVariable("cardId") String cardId) {
         ApiResponse<Void> apiResponse = new ApiResponse<Void>();
 
@@ -74,12 +80,12 @@ public class CardController {
             apiResponse.setMessage(e.getMessage());
             apiResponse.setData(null);
 
-            return ResponseEntity.internalServerError()
-                    .body(apiResponse);
+            return ResponseEntity.internalServerError().body(apiResponse);
         }
     }
 
     @PutMapping("/{cardId}")
+    @Operation(summary = "Update a card by ID")
     public ResponseEntity<ApiResponse<CardDomain>> updateCard(@PathVariable("cardId") String cardId, @RequestBody CardDto dto) {
         Optional<Card> optionalCard = cardService.findCardById(cardId);
         ApiResponse<CardDomain> apiResponse = new ApiResponse<>();
@@ -103,6 +109,7 @@ public class CardController {
     }
 
     @PutMapping("/{cardId}/disable")
+    @Operation(summary = "Disable a card by ID")
     public ResponseEntity<ApiResponse<CardDomain>> disableCard(@PathVariable("cardId") String cardId, @RequestBody CardDisableDto dto) {
         ApiResponse<CardDomain> apiResponse = new ApiResponse<>();
         Optional<Card> optionalCard = cardService.findCardById(cardId);
@@ -123,6 +130,7 @@ public class CardController {
     }
 
     @PutMapping("/{cardId}/enable")
+    @Operation(summary = "Enable a card by ID")
     public ResponseEntity<ApiResponse<CardDomain>> enableCard(@PathVariable("cardId") String cardId) {
         ApiResponse<CardDomain> apiResponse = new ApiResponse<>();
         Optional<Card> optionalCard = cardService.findCardById(cardId);
@@ -144,6 +152,7 @@ public class CardController {
     }
 
     @GetMapping("/{cardId}/isEnabled")
+    @Operation(summary = "Check if a card is enabled")
     public ResponseEntity<ApiResponse<Boolean>> isCardEnabled(@PathVariable("cardId") String cardId) {
         ApiResponse<Boolean> apiResponse = new ApiResponse<Boolean>();
         Optional<Card> optionalCard = cardService.findCardById(cardId);

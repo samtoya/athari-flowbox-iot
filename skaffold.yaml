@@ -1,0 +1,31 @@
+apiVersion: skaffold/v2beta10
+kind: Config
+metadata:
+  name: athari-iot-service
+build:
+  artifacts:
+    - image: samtoya/athari-iot-service
+      jib: { }
+deploy:
+  kustomize:
+    paths:
+      - kustomize/base
+profiles:
+  - name: production
+    build:
+      artifacts:
+        - image: gfacratharipazwe.azurecr.io/backend/athari-iot-service
+          jib: { }
+    deploy:
+      kustomize:
+        paths:
+          - kustomize/production
+  - name: staging
+    build:
+      artifacts:
+        - image: registry.digitalocean.com/noobs-registry/athari-iot-service
+          jib: { }
+    deploy:
+      kustomize:
+        paths:
+          - kustomize/staging

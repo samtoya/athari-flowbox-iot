@@ -1,25 +1,13 @@
 spring:
-  cloud:
-    config:
-      enabled: false
-      uri: http://localhost:11144
-  application:
-    name: iot-service
   datasource:
-    driver-class-name: org.postgresql.Driver
+    name: ${DATABASE_NAME}
     generate-unique-name: false
-    name: athari_flowbox_iot
-    username: flowbox@athari-flowbox-postgres
-    password: kya3yqv*yqw*ENP*crg
-    url: jdbc:postgresql://athari-flowbox-postgres.postgres.database.azure.com:5432/athari_flowbox_iot
-  jpa:
-    hibernate:
-      ddl-auto: update
-    database: postgresql
-    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
-    show-sql: true
-  sql:
-    init:
-      mode: always
+    url: jdbc:${DATABASE_TYPE}://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+    driver-class-name: org.postgresql.Driver
 server:
-  port: 3456
+  port: 22300
+springdoc:
+  swagger-ui:
+    path: /

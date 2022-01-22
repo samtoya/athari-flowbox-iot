@@ -1,6 +1,8 @@
 package com.grundfos.futurelab.athariflowbox.athariiotservice.device;
 
 import com.grundfos.futurelab.athariflowbox.athariiotservice.common.ApiResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,10 +17,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping(path = "/api/devices")
 @RequiredArgsConstructor
+@Tag(name = "Device", description = "Device Management")
 public class DeviceController {
     private final DeviceService deviceService;
 
     @GetMapping
+    @Operation(summary = "Get all devices")
     public ResponseEntity<ApiResponse<Collection<DeviceDomain>>> getAllDevices() {
         ApiResponse<Collection<DeviceDomain>> apiResponse = new ApiResponse<>();
         List<DeviceDomain> domains = deviceService.fetchAll().stream().map(DeviceDomain::mapEntityToDomain)
@@ -30,7 +34,8 @@ public class DeviceController {
     }
 
     @PostMapping
-    public ResponseEntity<ApiResponse<DeviceDomain>> createDevice(@RequestBody  DeviceDto dto) {
+    @Operation(summary = "Create a new device")
+    public ResponseEntity<ApiResponse<DeviceDomain>> createDevice(@RequestBody DeviceDto dto) {
         ApiResponse<DeviceDomain> apiResponse = new ApiResponse<>();
         Device device = deviceService.createDeviceFromDto(dto);
         DeviceDomain domain = DeviceDomain.mapEntityToDomain(device);
@@ -45,9 +50,10 @@ public class DeviceController {
     }
 
     @GetMapping("/{deviceId}")
+    @Operation(summary = "Get a device by id")
     public ResponseEntity<ApiResponse<DeviceDomain>> getDeviceById(@PathVariable("deviceId") String deviceId) {
-        ApiResponse<DeviceDomain> apiResponse = new ApiResponse<>();
         Optional<Device> optionalDevice = deviceService.findDeviceById(deviceId);
+        ApiResponse<DeviceDomain> apiResponse = new ApiResponse<>();
         if (!optionalDevice.isPresent()) {
             apiResponse.setSuccess(Boolean.FALSE);
             apiResponse.setMessage("Device not found with id: " + deviceId);
@@ -64,6 +70,7 @@ public class DeviceController {
     }
 
     @PutMapping("/{deviceId}")
+    @Operation(summary = "Update a device")
     public ResponseEntity<ApiResponse<DeviceDomain>> updateDevice(@PathVariable("deviceId") String deviceId,
                                                                   @RequestBody DeviceDto dto) {
         Optional<Device> optionalDevice = deviceService.findDeviceById(deviceId);
@@ -85,6 +92,7 @@ public class DeviceController {
     }
 
     @DeleteMapping("/{deviceId}")
+    @Operation(summary = "Delete a device")
     public ResponseEntity<ApiResponse<Void>> deleteDevice(@PathVariable("deviceId") String deviceId) {
         ApiResponse<Void> apiResponse = new ApiResponse<>();
         try {
@@ -101,4 +109,23 @@ public class DeviceController {
         }
     }
 
+    @GetMapping("/{deviceId}/passcode")
+    @Operation(summary = "Get passcode for a device ")
+    public ResponseEntity<ApiResponse<String>> getDevicePasscode(@PathVariable("deviceId") String deviceId) {
+        ApiResponse<String> apiResponse = new ApiResponse<>();
+        Optional<Device> optionalDevice = deviceService.findDeviceById(deviceId);
+        if (!optionalDevice.isPresent()) {
+            apiResponse.setSuccess(Boolean.FALSE);
+            apiResponse.setMessage("Device not found with id: " + deviceId);
+            return ResponseEntity.notFound().build();
+        }
+
+        Device device = optionalDevice.get();
+        String passcode = device.getPasscode();
+        apiResponse.setData(passcode);
+        apiResponse.setSuccess(Boolean.TRUE);
+        apiResponse.setMessage(null);
+
+        return ResponseEntity.ok(apiResponse);
+    }
 }

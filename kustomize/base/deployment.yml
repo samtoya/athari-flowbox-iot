@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: athari-iot-service
+  labels:
+    app: athari-iot-service
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: athari-iot-service
+      labels:
+        app: athari-iot-service
+    spec:
+      containers:
+        - name: athari-iot-service
+          image: samtoya/athari-iot-service:0.0.1
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DATABASE_TYPE
+              value: postgresql
+            - name: DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: athari-iot-service-secrets
+                  key: database-name
+            - name: DATABASE_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: athari-iot-service-secrets
+                  key: database-username
+            - name: DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: athari-iot-service-secrets
+                  key: database-password
+            - name: DATABASE_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: athari-iot-service-secrets
+                  key: database-host
+            - name: DATABASE_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: athari-iot-service-secrets
+                  key: database-port
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: athari-iot-service
