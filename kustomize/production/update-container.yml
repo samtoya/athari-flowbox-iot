@@ -11,7 +11,6 @@ spec:
         - name: athari-iot-service
           image: gfacratharipazwe.azurecr.io/backend/athari-iot-service:0.0.1
           imagePullPolicy: IfNotPresent
-      restartPolicy: Always
   selector:
     matchLabels:
       app: athari-iot-service
