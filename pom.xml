@@ -18,8 +18,8 @@
         <spring-cloud.version>2021.0.0</spring-cloud.version>
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
         <springdoc-openapi.version>1.6.4</springdoc-openapi.version>
-        <container-registry-location>samtoya</container-registry-location>
-        <container-base-image>mcr.microsoft.com/java/jdk:8-zulu-alpine</container-base-image>
+        <container-registry-location>gfacratharipazwe.azurecr.io/backend</container-registry-location>
+        <container-base-image>openjdk:8-jdk-alpine</container-base-image>
     </properties>
     <dependencies>
         <!-- ./Springdoc Open Api -->
@@ -107,17 +107,6 @@
             <artifactId>liquibase-core</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-kubernetes</artifactId>
-            <version>1.1.10.RELEASE</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-kubernetes-ribbon</artifactId>
-            <version>1.1.10.RELEASE</version>
-        </dependency>
     </dependencies>
     <dependencyManagement>
         <dependencies>
@@ -164,7 +153,7 @@
                         <image>${container-base-image}</image>
                     </from>
                     <to>
-                        <image>${container-base-image}/${project.artifactId}:${project.version}</image>
+                        <image>${container-registry-location}/${project.artifactId}:${project.version}</image>
                     </to>
                 </configuration>
             </plugin>

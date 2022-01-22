@@ -1,0 +1,17 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: athari-iot-service
+  labels:
+    app: athari-iot-service
+spec:
+  template:
+    spec:
+      containers:
+        - name: athari-iot-service
+          image: gfacratharipazwe.azurecr.io/backend/athari-iot-service:0.0.1
+          imagePullPolicy: IfNotPresent
+      restartPolicy: Always
+  selector:
+    matchLabels:
+      app: athari-iot-service
