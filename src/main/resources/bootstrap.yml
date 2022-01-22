@@ -17,3 +17,11 @@ spring:
   sql:
     init:
       mode: never
+#  cloud:
+#    kubernetes:
+#      ribbon:
+#        enabled: true
+ribbon:
+  http:
+    client:
+      enabled: true
