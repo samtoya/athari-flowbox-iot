@@ -19,7 +19,8 @@
         <dockerfile-maven-version>1.4.13</dockerfile-maven-version>
         <springdoc-openapi.version>1.6.4</springdoc-openapi.version>
         <container-registry-location>gfacratharipazwe.azurecr.io/backend</container-registry-location>
-        <container-base-image>openjdk:8-jdk-alpine</container-base-image>
+        <container-base-image>openjdk:8u222-slim</container-base-image>
+<!--        <container-base-image>openjdk:8-jdk-alpine</container-base-image>-->
     </properties>
     <dependencies>
         <!-- ./Springdoc Open Api -->

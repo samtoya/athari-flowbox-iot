@@ -1,4 +1,6 @@
 spring:
+  application:
+    name: iot-service
   datasource:
     name: ${DATABASE_NAME}
     generate-unique-name: false
@@ -6,6 +8,23 @@ spring:
     username: ${DATABASE_USERNAME}
     password: ${DATABASE_PASSWORD}
     driver-class-name: org.postgresql.Driver
+  jpa:
+
+    hibernate:
+      ddl-auto: none
+    database: postgresql
+    database-platform: org.hibernate.dialect.PostgreSQL94Dialect
+    liquibase:
+      database-change-log-table: changelog
+      enabled: true
+      change-log: db/changelog/changelog-master.xml
+      driver-class-name: org.postgresql.Driver
+      url: jdbc:postgresl://${DATABASE_HOST}:${DATABASE_PORT}/${DATABASE_NAME}
+      user: ${DATABASE_USERNAME}
+      password: ${DATABASE_PASSWORD}
+  sql:
+    init:
+      mode: never
 server:
   port: 22300
 springdoc:

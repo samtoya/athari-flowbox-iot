@@ -5,3 +5,8 @@ resources:
 patchesStrategicMerge:
   - update-container.yml
   - update-secrets.yml
+
+configMapGenerator:
+  - name: athari-iot-config-overrides
+    files:
+      - liquibase.properties
