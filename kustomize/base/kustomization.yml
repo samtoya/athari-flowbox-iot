@@ -4,3 +4,4 @@ resources:
   - deployment.yml
   - secrets.yml
   - service.yml
+  - configmap.yml

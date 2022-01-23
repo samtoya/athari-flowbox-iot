@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet author="samtoya" id="1642798059445-1">
+        <createTable tableName="cards">
+            <column name="id" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp"/>
+            <column name="disabled_at" type="timestamp"/>
+            <column name="holder" type="varchar"/>
+            <column name="reason" type="text"/>
+            <column name="serial_number" type="varchar"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

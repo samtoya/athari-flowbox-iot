@@ -8,3 +8,4 @@ spec:
     app: athari-iot-service
   ports:
     - port: 80
+      targetPort: 8080

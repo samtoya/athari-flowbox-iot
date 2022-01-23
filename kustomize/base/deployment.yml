@@ -16,14 +16,14 @@ spec:
       containers:
         - name: athari-iot-service
           image: samtoya/athari-iot-service:0.0.1
+          ports:
+            - containerPort: 8080
           imagePullPolicy: IfNotPresent
           env:
-            - name: DATABASE_TYPE
-              value: postgresql
             - name: DATABASE_NAME
               valueFrom:
-                secretKeyRef:
-                  name: athari-iot-service-secrets
+                configMapKeyRef:
+                  name: athari-iot-config
                   key: database-name
             - name: DATABASE_USERNAME
               valueFrom:
@@ -42,10 +42,11 @@ spec:
                   key: database-host
             - name: DATABASE_PORT
               valueFrom:
-                secretKeyRef:
-                  name: athari-iot-service-secrets
+                configMapKeyRef:
+                  name: athari-iot-config
                   key: database-port
       restartPolicy: Always
+
   selector:
     matchLabels:
       app: athari-iot-service

@@ -8,19 +8,10 @@ metadata:
 spec:
   template:
     spec:
-      volumes:
-        - name: athari-iot-config-volume
-          configMap:
-            name: athari-iot-config
       containers:
         - name: athari-iot-service
           image: gfacratharipazwe.azurecr.io/backend/athari-iot-service:0.0.1
           imagePullPolicy: IfNotPresent
-          args:
-            - --properties-file=/etc/
-          volumeMounts:
-            - mountPath: /etc/config
-              name: athari-iot-config-volume
   selector:
     matchLabels:
       app: athari-iot-service

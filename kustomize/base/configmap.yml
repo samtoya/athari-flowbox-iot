@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: athari-iot-config
+  namespace: athari
+data:
+  database-name: "athari_flowbox_iot"
+  database-port: "5432"

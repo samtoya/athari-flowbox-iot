@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.5.xsd">
+
+    <changeSet author="samtoya" id="1642798059445-3">
+        <createTable tableName="device_sessions">
+            <column name="id" type="varchar">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_at" type="timestamp"/>
+            <column name="ended_at" type="timestamp"/>
+            <column name="is_active" type="BOOL"/>
+            <column name="phone_number" type="varchar"/>
+            <column name="serial_number" type="varchar"/>
+            <column name="session_id" type="varchar"/>
+            <column name="status" type="varchar"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>
